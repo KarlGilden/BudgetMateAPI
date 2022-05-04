@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using BudgetMateAPI.Data;
 using BudgetMateAPI.Dtos;
+using BudgetMateAPI.Helpers;
 using BudgetMateAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace BudgetMateAPI.Controllers
 {
@@ -14,10 +16,13 @@ namespace BudgetMateAPI.Controllers
     public class AuthController : Controller
     {
         private readonly IBudgetMateRepo _repository;
-           
-        public AuthController(IBudgetMateRepo repository)
+        private readonly JwtService _jwtService;
+
+        public AuthController(IBudgetMateRepo repository, JwtService jwtService)
         {
             _repository = repository;
+            _jwtService = jwtService;
+
         }
 
         [HttpPost("register")]
@@ -46,7 +51,18 @@ namespace BudgetMateAPI.Controllers
             {
                 return BadRequest(new { message = "Email and password combination is invalid" });
             }
-            return Ok(u);
+
+            var jwt = _jwtService.Generate(u.Id);
+
+            Response.Cookies.Append("jwt", jwt, new CookieOptions
+            {
+                    HttpOnly=true
+            });
+
+            return Ok(new
+            {
+                message="success"
+            });
         }
     }
 }
