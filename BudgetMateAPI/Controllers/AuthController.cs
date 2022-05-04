@@ -64,5 +64,36 @@ namespace BudgetMateAPI.Controllers
                 message="success"
             });
         }
+
+        [HttpGet("user")]
+        public IActionResult GetUser()
+        {
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+                var token = _jwtService.Verify(jwt);
+
+                int userId = int.Parse(token.Issuer);
+
+                User user = _repository.GetById(userId);
+
+                return Ok(user);
+            } catch (Exception e)
+            {
+                return Unauthorized();
+            }
+
+        }
+
+        [HttpGet("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("jwt");
+
+            return Ok(new
+            {
+                message= "success"
+            });
+        }
     }
 }

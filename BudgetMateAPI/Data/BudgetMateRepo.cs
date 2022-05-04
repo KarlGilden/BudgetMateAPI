@@ -27,5 +27,11 @@ namespace BudgetMateAPI.Data
             User user = _context.Users.FirstOrDefault(e => e.Email == email);
             return user;
         }
+
+        public User GetById(int id)
+        {
+            User user = _context.Users.FirstOrDefault(e => e.Id == id);
+            return user;
+        }
     }
 }
