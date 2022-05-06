@@ -41,6 +41,12 @@ namespace BudgetMateAPI.Data
             return ts;
         }
 
+        public Transaction GetTransactionById(int id)
+        {
+            Transaction t = _context.Transactions.FirstOrDefault(t => t.Id == id);
+            return t;
+        }
+
         public User GetByEmail(string email)
         {
             User user = _context.Users.FirstOrDefault(e => e.Email == email);
