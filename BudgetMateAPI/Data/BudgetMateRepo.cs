@@ -22,6 +22,25 @@ namespace BudgetMateAPI.Data
             return user;
         }
 
+        public Transaction Create(Transaction transaction)
+        {
+            _context.Transactions.Add(transaction);
+            transaction.Id = _context.SaveChanges();
+            return transaction;
+        }
+
+        public void Delete(Transaction transaction)
+        {
+             _context.Transactions.Remove(transaction);
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<Transaction> GetAllForUser(int userId)
+        {
+            IEnumerable<Transaction> ts = _context.Transactions.Where(t => t.UserId == userId);
+            return ts;
+        }
+
         public User GetByEmail(string email)
         {
             User user = _context.Users.FirstOrDefault(e => e.Email == email);

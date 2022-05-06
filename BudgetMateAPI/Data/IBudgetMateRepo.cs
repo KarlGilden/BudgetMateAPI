@@ -10,8 +10,13 @@ namespace BudgetMateAPI.Data
     {
         User Create(User user);
         User GetByEmail(string email);
-
         User GetById(int id);
+
+        Transaction Create(Transaction transaction);
+        void Delete(int id);
+        IEnumerable<Transaction> GetAllForUser(int userId);
+
+
 
     }
 }
