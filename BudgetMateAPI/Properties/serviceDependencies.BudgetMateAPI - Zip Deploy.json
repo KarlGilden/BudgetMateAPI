@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/BudgetMateAPIapi/apis/BudgetMateAPI",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/budgetmateapidbserver/databases/BudgetMateAPI_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:Default",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
