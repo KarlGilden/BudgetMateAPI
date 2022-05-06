@@ -92,4 +92,5 @@ namespace BudgetMateAPI.Controllers
                 return Unauthorized();
             }
         }
+    }
 }
