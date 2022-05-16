@@ -50,7 +50,7 @@ namespace BudgetMateAPI
             app.UseRouting();
 
             app.UseCors(options => options
-                .WithOrigins("http://localhost:3000")
+                .WithOrigins("http://localhost:3000, https://master--effervescent-cactus-53aa4e.netlify.app/")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
